@@ -577,7 +577,6 @@ img {
         left: 50%;
         transform: translate(-50%, -50%);
         padding: 1.5rem 1.5rem 0.6rem;
-        max-width: 45rem;
         height: auto;
         background: #fff;
         @media (max-width: 767px) {
@@ -586,11 +585,9 @@ img {
         }
     }
     &-image {
-        width: 42rem;
-        aspect-ratio: calc(420 / 220);
+        width: calc(420 / 1080 * 100vw);
         @media (max-width: 767px) {
-            width: 27.4rem;
-            aspect-ratio: calc(274 / 144);
+            width: calc(274 / 375 * 100vw);
         }
     }
     &-caption {
