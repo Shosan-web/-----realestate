@@ -13,11 +13,12 @@ const swiper = new Swiper('.swiper', {
     },
 });
 
-/* スムーススクロール */
+/* スムーススクロール */    
 $('a[href^="#"]').click(function(){
     var href = $(this).attr("href");
     var target = $(href == "#" || href == "" ? 'html' :href);
-    var position = target.offset().top - 80;// ヘッダーの高さ80px分を引く
+    const headerHeight = $(window).width() > 900 ? 80 : 50;
+    var position = target.offset().top - headerHeight;
     $("html, body").animate({scrollTop:position}, 100, "swing");
     return false;
 });
@@ -66,17 +67,16 @@ $(window).on('scroll',function() {
 // モーダルの表示・非表示
 $(".modal-open").click(
     function() {
-        const modalId = $(this).data("modal")
+        const modalId = $(this).data("modal");
         $("[data-modal-content='" + modalId + "']").show();
-        $("body").addClass("is-open")
+        $("body").addClass("is-open");
         goTop.hide();
     }
 );
 $(".modal-close").click(
     function() {
-        $(".modal-area").hide()
-        $("body").removeClass("is-open")
-        goTop.show();
+        $(".modal-area").hide();
+        $("body").removeClass("is-open");
+        // goTop.show();
     }
 );
-
