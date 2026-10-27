@@ -17,9 +17,19 @@ const swiper = new Swiper('.swiper', {
 $('a[href^="#"]').click(function(){
     var href = $(this).attr("href");
     var target = $(href == "#" || href == "" ? 'html' :href);
-    const headerHeight = $(window).width() > 900 ? 80 : 50;
+    const headerHeight = $(window).width() > 767 ? 80 : 50;
     var position = target.offset().top - headerHeight;
     $("html, body").animate({scrollTop:position}, 100, "swing");
+    if (
+        $(window).width() <767 &&
+        $(this).hasClass("header__drawer-link")
+    ) {
+        // ハンバーガーメニューの三本線を元に戻す
+        $(".header__hamburger-line").removeClass("is-active");
+
+        // ドロワーメニューを閉じる
+        $(".header__drawer").removeClass("is-open");
+    }
     return false;
 });
 
@@ -77,6 +87,5 @@ $(".modal-close").click(
     function() {
         $(".modal-area").hide();
         $("body").removeClass("is-open");
-        // goTop.show();
     }
 );
