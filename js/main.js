@@ -43,17 +43,17 @@ goTop.hide();
 // 100pxスクロールしたらボタン表示・100px以下ならボタン非表示
 $(window).scroll(function () {
     if ($(this).scrollTop() > 100) {
-        // 0.3秒でフェードイン
-        goTop.fadeIn(300);
+        // 0.7秒でフェードイン
+        goTop.fadeIn(700);
     } else {
-        // 0.3秒でフェードアウト
-        goTop.fadeOut(300);
+        // 0.7秒でフェードアウト
+        goTop.fadeOut(700);
     }
 });
 
-// ボタンがクリックされたら1秒でページトップへ戻る
+// ボタンがクリックされたら0.1でページトップへ戻る
 goTop.click(function () {
-    $("body, html").animate({ scrollTop: 0}, 1000);
+    $("body, html").animate({ scrollTop: 0}, 100);
     return false;
 });
 
@@ -63,11 +63,9 @@ $(window).on('scroll',function() {
     const scrollPos = $(window).scrollTop();
     // aboutセクションの位置(上からの距離)を取得
     const aboutTop = $('#about').offset().top;
-    // ヘッダーの高さ(必要に応じて調整)
-    const headerHeight = $('.header').outerHeight();
 
     // aboutセクションに差し掛かったか判定
-    if (scrollPos >= aboutTop - headerHeight) {
+    if (scrollPos > aboutTop) {
         $('.header').addClass('is-scrolled');
     } else {
         $('.header').removeClass('is-scrolled');
@@ -78,14 +76,25 @@ $(window).on('scroll',function() {
 $(".modal-open").click(
     function() {
         const modalId = $(this).data("modal");
-        $("[data-modal-content='" + modalId + "']").show();
+        $("[data-modal-content='" + modalId + "']").fadeIn(400);
         $("body").addClass("is-open");
         goTop.hide();
     }
 );
 $(".modal-close").click(
     function() {
-        $(".modal-area").hide();
+        $(".modal-area").fadeOut(400);
         $("body").removeClass("is-open");
+        goTop.show();
     }
-);
+); 
+
+// フェードイン(ヘッダー・FV・フッター以外)
+AOS.init({
+    delay: 100,
+    duration: 1000,
+    easing: 'ease-out',
+    once: true,
+});
+
+
