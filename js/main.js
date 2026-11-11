@@ -7,6 +7,7 @@ $("#js-hamburger").click(function () {
 /* FVのスライド */
 const swiper = new Swiper('.swiper', {
     loop: true,
+    speed: 1000,
     autoplay: {
         delay: 3000,
         disableOnInteraction: false,
@@ -37,17 +38,12 @@ $('a[href^="#"]').click(function(){
 // 変数宣言と代入
 var goTop = $(".fas");
 
-// サイト上部ではボタンを非表示
-goTop.hide();
-
 // 100pxスクロールしたらボタン表示・100px以下ならボタン非表示
 $(window).scroll(function () {
     if ($(this).scrollTop() > 100) {
-        // 0.7秒でフェードイン
-        goTop.fadeIn(700);
+        goTop.addClass('active');
     } else {
-        // 0.7秒でフェードアウト
-        goTop.fadeOut(700);
+        goTop.removeClass('active');
     }
 });
 
@@ -78,14 +74,14 @@ $(".modal-open").click(
         const modalId = $(this).data("modal");
         $("[data-modal-content='" + modalId + "']").fadeIn(400);
         $("body").addClass("is-open");
-        goTop.hide();
+        goTop.removeClass('active');
     }
 );
 $(".modal-close").click(
     function() {
         $(".modal-area").fadeOut(400);
         $("body").removeClass("is-open");
-        goTop.show();
+        goTop.addClass('active');
     }
 ); 
 
